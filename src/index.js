@@ -2,9 +2,12 @@
  * Default settings
  *
  */
-const defaults = {
+export const defaults = {
   target: '_blank',
-  rel: 'nofollow noopener noreferrer'
+  rel: 'nofollow noopener noreferrer',
+  test: (element) =>
+    ['http:', 'https:'].includes(element.protocol) &&
+    element.hostname !== window.location.hostname
 }
 
 /*
@@ -44,7 +47,6 @@ function observeLinks() {
               ? Array.from(addedNode.querySelectorAll('a'))
               : []
           )
-          .filter(isExternalLink)
         transformLinks(links)
       })
     })
@@ -65,7 +67,7 @@ function transformLinks(links) {
 }
 
 /**
- * Transform a link.
+ * Add the required attributes to a link.
  * @param {HTMLElement} link
  */
 function transformLink(link) {
@@ -81,25 +83,13 @@ function transformLink(link) {
 }
 
 /**
- * Check if a node is a link.
- * @param {HTMLElement} node
+ * Check if a node needs transforming.
+ * @param {HTMLElement} element
  */
-function isLink(node) {
-  return node && node.tagName === 'A'
-}
-
-/**
- * Check if a link is external to the current origin.
- * @param {HTMLElement} link
- */
-function isExternal(link) {
-  return link.hostname !== window.location.hostname
-}
-
-/**
- * Check if a node is a link and external.
- * @param {HTMLElement} node
- */
-function isExternalLink(node) {
-  return isLink(node) && isExternal(node)
+function isExternalLink(element) {
+  return (
+    element &&
+    element.tagName === 'A' &&
+    (settings.test ? settings.test(element) : defaults.test(element))
+  )
 }
