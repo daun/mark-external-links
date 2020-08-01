@@ -38,15 +38,14 @@ export default function markExternalLinks(options = {}) {
  *
  */
 function observeLinks() {
-  observer = new MutationObserver((mutations) => {
+  observer = new window.MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       mutation.addedNodes.forEach((addedNode) => {
-        const links = [addedNode]
-          .concat(
-            addedNode.querySelectorAll
-              ? Array.from(addedNode.querySelectorAll('a'))
-              : []
-          )
+        const links = [addedNode].concat(
+          addedNode.querySelectorAll
+            ? Array.from(addedNode.querySelectorAll('a'))
+            : []
+        )
         transformLinks(links)
       })
     })
