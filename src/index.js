@@ -41,7 +41,7 @@ function observeLinks() {
         const links = [addedNode]
           .concat(
             addedNode.querySelectorAll
-              ? [...addedNode.querySelectorAll('a')]
+              ? Array.from(addedNode.querySelectorAll('a'))
               : []
           )
           .filter(isExternalLink)
