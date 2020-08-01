@@ -1,7 +1,7 @@
 {
   "name": "mark-external-links",
   "description": "Add target and rel attributes to external links",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Philipp Daun <daun@daun.ltd>",
   "license": "MIT",
   "source": "src/index.js",
