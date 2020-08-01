@@ -26,7 +26,7 @@ let observer = null
 export default function markExternalLinks(options = {}) {
   Object.assign(settings, options)
 
-  transformLinks([...document.links])
+  transformLinks(Array.from(document.links))
   observeLinks()
 }
 
