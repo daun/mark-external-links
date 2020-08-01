@@ -3,6 +3,8 @@
 [![NPM version](https://img.shields.io/npm/v/mark-external-links)](https://www.npmjs.com/package/mark-external-links)
 [![Bundle size](https://img.shields.io/bundlephobia/minzip/mark-external-links?label=size)](https://bundlephobia.com/result?p=mark-external-links)
 [![GitHub license](https://img.shields.io/github/license/daun/mark-external-links)](./LICENSE)
+![Travis Build](https://img.shields.io/travis/com/daun/mark-external-links)
+![Codecov](https://img.shields.io/codecov/c/github/daun/mark-external-links)
 
 Add target and rel attributes to external links.
 
