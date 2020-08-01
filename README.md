@@ -12,6 +12,18 @@ Automatically detects new links added to the document by installing a mutation
 observer. This makes it safe to use when adding content via AJAX, using frontend
 frameworks, etc.
 
+**Before**
+
+```html
+<a href="https://external.web">link</a>
+```
+
+**After**
+
+```html
+<a href="https://external.web" target="_blank" rel="nofollow noopener noreferrer">link</a>
+```
+
 ## Installation
 
 ```bash
