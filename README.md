@@ -35,7 +35,8 @@ All options and their defaults:
 ```js
 markExternalLinks({
   target: '_blank',
-  rel: 'nofollow noopener noreferrer'
+  rel: 'nofollow noopener noreferrer',
+  test: link => link.hostname !== window.location.hostname
 })
 ```
 
