@@ -19,40 +19,19 @@ const settings = {}
  */
 let observer = null
 
-/*
- * Transform links by adding target and rel attributes
- *
+/**
+ * Mark external links.
+ * @param {object} options
  */
-function transformLinks(links) {
-  links.filter(isExternalLink).forEach(transformLink)
-}
+export default function markExternalLinks(options = {}) {
+  Object.assign(settings, options)
 
-function transformLink(link) {
-  /* eslint-disable no-param-reassign */
-
-  if (settings.target !== false) {
-    link.target = settings.target || defaults.target
-  }
-
-  if (settings.rel !== false) {
-    link.rel = settings.rel || defaults.rel
-  }
-}
-
-function isLink(node) {
-  return node && node.tagName === 'A'
-}
-
-function isExternal(link) {
-  return link.hostname !== window.location.hostname
-}
-
-function isExternalLink(link) {
-  return isLink(link) && isExternal(link)
+  transformLinks([...document.links])
+  observeLinks()
 }
 
 /*
- * Observe newly added links
+ * Install a MutationObserver to transform dynamically added links
  *
  */
 function observeLinks() {
@@ -77,13 +56,50 @@ function observeLinks() {
   return observer
 }
 
-/*
- * Mark external links
- *
+/**
+ * Transform elements, filtering down to actual external links
+ * @param {HTMLElement[]} links
  */
-export default function markExternalLinks(options = {}) {
-  Object.assign(settings, options)
+function transformLinks(links) {
+  links.filter(isExternalLink).forEach(transformLink)
+}
 
-  transformLinks([...document.links])
-  observeLinks()
+/**
+ * Transform a link.
+ * @param {HTMLElement} link
+ */
+function transformLink(link) {
+  /* eslint-disable no-param-reassign */
+
+  if (settings.target !== false) {
+    link.target = settings.target || defaults.target
+  }
+
+  if (settings.rel !== false) {
+    link.rel = settings.rel || defaults.rel
+  }
+}
+
+/**
+ * Check if a node is a link.
+ * @param {HTMLElement} node
+ */
+function isLink(node) {
+  return node && node.tagName === 'A'
+}
+
+/**
+ * Check if a link is external to the current origin.
+ * @param {HTMLElement} link
+ */
+function isExternal(link) {
+  return link.hostname !== window.location.hostname
+}
+
+/**
+ * Check if a node is a link and external.
+ * @param {HTMLElement} node
+ */
+function isExternalLink(node) {
+  return isLink(node) && isExternal(node)
 }
