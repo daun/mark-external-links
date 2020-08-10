@@ -42,8 +42,8 @@ function observeLinks() {
     mutations.forEach((mutation) => {
       mutation.addedNodes.forEach((addedNode) => {
         const links = [addedNode].concat(
-          addedNode.querySelectorAll
-            ? Array.from(addedNode.querySelectorAll('a'))
+          addedNode.getElementsByTagName
+            ? Array.from(addedNode.getElementsByTagName('a'))
             : []
         )
         transformLinks(links)
