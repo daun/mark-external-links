@@ -41,12 +41,12 @@ function observeLinks() {
   observer = new window.MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       mutation.addedNodes.forEach((addedNode) => {
-        const links = [addedNode].concat(
-          addedNode.getElementsByTagName
-            ? Array.from(addedNode.getElementsByTagName('a'))
-            : []
-        )
-        transformLinks(links)
+        if (addedNode.getElementsByTagName) {
+          const addedLinks = Array.from(addedNode.getElementsByTagName('a'))
+          transformLinks([addedNode].concat(addedLinks))
+        } else {
+          transformLinks([addedNode])
+        }
       })
     })
   })

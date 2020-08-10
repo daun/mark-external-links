@@ -15,7 +15,8 @@ const html = [
   '<p><a href=".">current link</a></p>',
   '<p><a href="..">parent link</a></p>',
   '<p><a href="mailto:test@example.web">email link</a></p>',
-  '<p><a href="tel:+12345678">phone link</a></p>'
+  '<p><a href="tel:+12345678">phone link</a></p>',
+  'Text node'
 ].join('')
 
 const externalLinkIndexes = [0]
